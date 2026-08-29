@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Moje podróże | Dziennik</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- v=3 wymusza pobranie aktualnego CSS -->
+  <link rel="stylesheet" href="styles.css?v=3">
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <a class="logo" href="#start">
+    w drodze<span>.</span>
+  </a>
+
+  <nav aria-label="Główna nawigacja">
+    <a href="#podroze">Podróże</a>
+    <a href="#o-mnie">O mnie</a>
+  </nav>
+
+  <a class="contact-link" href="mailto:hello@example.com">
+    Napisz do mnie
+  </a>
+
+</header>
+
+
+<main>
+
+  <!-- HERO -->
+
+  <section class="hero" id="start">
+
+    <div class="hero-text">
+
+      <p class="eyebrow">
+        osobisty dziennik podróży
+      </p>
+
+      <h1>
+        Świat jest
+        <em>większy</em>,
+        niż myślisz.
+      </h1>
+
+      <p class="intro">
+        Zbieram tutaj miejsca, smaki i wspomnienia z podróży.
+        Nie jest to przewodnik — raczej mały zapis miejsc,
+        które zostały mi w pamięci.
+      </p>
+
+      <a class="button" href="#podroze">
+        Zobacz podróże ↓
+      </a>
+
+    </div>
+
+
+    <div class="hero-image">
+
+      <img
+        src="images/cypr-1.jpg"
+        alt="Podróż na Cypr"
+      >
+
+    </div>
+
+  </section>
+
+
+  <!-- PODRÓŻE -->
+
+  <section class="trips-section" id="podroze">
+
+    <div class="section-heading">
+
+      <div>
+
+        <p class="eyebrow">
+          moje podróże
+        </p>
+
+        <h2>
+          Historie z drogi
+        </h2>
+
+      </div>
+
+      <p class="section-description">
+        Kilka miejsc, kilka wspomnień i dużo zdjęć.
+      </p>
+
+    </div>
+
+
+    <!-- FILTRY -->
+
+    <div class="filters" aria-label="Filtruj podróże">
+
+      <button
+        class="filter-button active"
+        type="button"
+        data-filter="all"
+      >
+        Wszystkie
+      </button>
+
+      <button
+        class="filter-button"
+        type="button"
+        data-filter="city"
+      >
+        Miasta
+      </button>
+
+      <button
+        class="filter-button"
+        type="button"
+        data-filter="nature"
+      >
+        Natura
+      </button>
+
+    </div>
+
+
+    <div class="trip-grid">
+
+
+      <!-- CYPR -->
+
+      <article
+        class="trip-card"
+        data-category="city"
+      >
+
+        <div class="gallery">
+
+          <div class="gallery-main-wrapper">
+
+            <img
+              class="gallery-main"
+              src="images/cypr-1.jpg"
+              alt="Cypr — zdjęcie główne"
+            >
+
+          </div>
+
+
+          <div class="gallery-thumbnails">
+
+            <button
+              class="thumbnail active"
+              type="button"
+              data-image="images/cypr-1.jpg"
+              data-alt="Cypr — zdjęcie 1"
+            >
+              <img
+                src="images/cypr-1.jpg"
+                alt="Miniatura Cypr — zdjęcie 1"
+              >
+            </button>
+
+
+            <button
+              class="thumbnail"
+              type="button"
+              data-image="images/cypr-2.jpg"
+              data-alt="Cypr — zdjęcie 2"
+            >
+              <img
+                src="images/cypr-2.jpg"
+                alt="Miniatura Cypr — zdjęcie 2"
+              >
+            </button>
+
+
+            <button
+              class="thumbnail"
+              type="button"
+              data-image="images/cypr-3.jpg"
+              data-alt="Cypr — zdjęcie 3"
+            >
+              <img
+                src="images/cypr-3.jpg"
+                alt="Miniatura Cypr — zdjęcie 3"
+              >
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="trip-info">
+
+          <p class="trip-location">
+            CYPR · 2023
+          </p>
+
+          <h3>
+            Famagusta i Varosha
+          </h3>
+
+          <p class="trip-short">
+            Północna część wyspy, Famagusta i Varosha —
+            miejsce, które na długo zostało w pamięci.
+          </p>
+
+
+          <div
+            class="trip-description"
+            hidden
+          >
+
+            <p>
+              Północna część Cypru była dla mnie przede wszystkim
+              spotkaniem z historią, którą można zobaczyć na własne oczy.
+            </p>
+
+            <p>
+              Podczas podróży odwiedziłem Famagustę — historyczne miasto
+              na wschodnim wybrzeżu wyspy — oraz Varoshę, dawną dzielnicę
+              wypoczynkową Famagusty.
+            </p>
+
+            <p>
+              Varosha została opuszczona w 1974 roku i przez dziesięciolecia
+              pozostawała zamknięta. Jej częściowe udostępnienie nastąpiło
+              w 2020 roku, po 46 latach.
+            </p>
+
+            <p>
+              Najbardziej zapadł mi w pamięć kontrast pomiędzy żywą
+              Famagustą a pozostawioną w czasie Varoshą.
+            </p>
+
+          </div>
+
+
+          <button
+            class="read-more"
+            type="button"
+            aria-expanded="false"
+          >
+            Czytaj <span aria-hidden="true">↗</span>
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- GRUZJA -->
+
+      <article
+        class="trip-card"
+        data-category="city"
+      >
+
+        <div class="gallery">
+
+          <div class="gallery-main-wrapper">
+
+            <img
+              class="gallery-main"
+              src="images/gruzja-1.jpeg"
+              alt="Kutaisi — zdjęcie główne"
+            >
+
+          </div>
+
+
+          <div class="gallery-thumbnails">
+
+            <button
+              class="thumbnail active"
+              type="button"
+              data-image="images/gruzja-1.jpeg"
+              data-alt="Kutaisi — zdjęcie 1"
+            >
+              <img
+                src="images/gruzja-1.jpeg"
+                alt="Miniatura Kutaisi — zdjęcie 1"
+              >
+            </button>
+
+
+            <button
+              class="thumbnail"
+              type="button"
+              data-image="images/gruzja-2.jpeg"
+              data-alt="Kutaisi — zdjęcie 2"
+            >
+              <img
+                src="images/gruzja-2.jpeg"
+                alt="Miniatura Kutaisi — zdjęcie 2"
+              >
+            </button>
+
+
+            <button
+              class="thumbnail"
+              type="button"
+              data-image="images/gruzja-3.jpeg"
+              data-alt="Kutaisi — zdjęcie 3"
+            >
+              <img
+                src="images/gruzja-3.jpeg"
+                alt="Miniatura Kutaisi — zdjęcie 3"
+              >
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="trip-info">
+
+          <p class="trip-location">
+            GRUZJA · KUTAISI · 2023
+          </p>
+
+          <h3>
+            Kutaisi — między historią a codziennością
+          </h3>
+
+          <p class="trip-short">
+            Miasto, które zapamiętałem przede wszystkim za ludzi,
+            jedzenie i spokojny rytm codziennego życia.
+          </p>
+
+
+          <div
+            class="trip-description"
+            hidden
+          >
+
+            <p>
+              Kutaisi najlepiej poznawało mi się bez pośpiechu —
+              spacerując ulicami i obserwując codzienne życie miasta.
+            </p>
+
+            <p>
+              Położone nad rzeką Rioni należy do najstarszych miast Gruzji,
+              a w okolicy można znaleźć między innymi katedrę Bagrati
+              i klasztor Gelati.
+            </p>
+
+            <p>
+              Z tej podróży bardzo mocno zapamiętałem również jedzenie:
+              ogromne porcje, mnogość potraw i momenty, kiedy naprawdę
+              trudno było zjeść wszystko, co pojawiało się na stole.
+            </p>
+
+            <p>
+              Do tego dochodziła niezwykła uprzejmość
+              i gościnność ludzi.
+            </p>
+
+          </div>
+
+
+          <button
+            class="read-more"
+            type="button"
+            aria-expanded="false"
+          >
+            Czytaj <span aria-hidden="true">↗</span>
+          </button>
+
+        </div>
+
+      </article>
+
+
+
+      <!-- TATRY -->
+
+      <article
+        class="trip-card"
+        data-category="nature"
+      >
+
+        <div class="gallery">
+
+          <div class="gallery-main-wrapper">
+
+            <img
+              class="gallery-main"
+              src="images/tatry-1.jpeg"
+              alt="Tatry — zdjęcie główne"
+            >
+
+          </div>
+
+
+          <div class="gallery-thumbnails">
+
+            <button
+              class="thumbnail active"
+              type="button"
+              data-image="images/tatry-1.jpeg"
+              data-alt="Tatry — zdjęcie 1"
+            >
+              <img
+                src="images/tatry-1.jpeg"
+                alt="Miniatura Tatry — zdjęcie 1"
+              >
+            </button>
+
+
+            <button
+              class="thumbnail"
+              type="button"
+              data-image="images/tatry-2.jpeg"
+              data-alt="Tatry — zdjęcie 2"
+            >
+              <img
+                src="images/tatry-2.jpeg"
+                alt="Miniatura Tatry — zdjęcie 2"
+              >
+            </button>
+
+
+            <button
+              class="thumbnail"
+              type="button"
+              data-image="images/tatry-3.jpeg"
+              data-alt="Tatry — zdjęcie 3"
+            >
+              <img
+                src="images/tatry-3.jpeg"
+                alt="Miniatura Tatry — zdjęcie 3"
+              >
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="trip-info">
+
+          <p class="trip-location">
+            POLSKA · TATRY · 2022
+          </p>
+
+          <h3>
+            Dolina Małej Łąki i Dolina Miętusia
+          </h3>
+
+          <p class="trip-short">
+            Górska wycieczka przez doliny i Przysłop Miętusi
+            w kierunku Czerwonych Wierchów.
+          </p>
+
+
+          <div
+            class="trip-description"
+            hidden
+          >
+
+            <p>
+              Jedna z moich górskich wycieczek po polskich Tatrach.
+              Trasa prowadziła przez Dolinę Małej Łąki i Dolinę Miętusi,
+              w kierunku Przysłopu Miętusiego i dalej w stronę
+              Czerwonych Wierchów.
+            </p>
+
+            <p>
+              Po drodze krajobraz zmieniał się od leśnych fragmentów
+              i spokojniejszych dolin po coraz bardziej otwarte
+              górskie przestrzenie.
+            </p>
+
+            <p>
+              To była przede wszystkim wycieczka dla samej drogi —
+              z czasem na zatrzymanie się i popatrzenie na góry.
+            </p>
+
+          </div>
+
+
+          <button
+            class="read-more"
+            type="button"
+            aria-expanded="false"
+          >
+            Czytaj <span aria-hidden="true">↗</span>
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- O MNIE -->
+
+  <section class="about" id="o-mnie">
+
+    <p class="eyebrow">
+      trochę o mnie
+    </p>
+
+    <h2>
+      Podróżuję,
+      <em>obserwuję</em>,
+      uczę się.
+    </h2>
+
+    <p>
+      Podróże są dla mnie sposobem na poznawanie nowych miejsc,
+      ludzi i codzienności z innej perspektywy.
+      Ta strona jest małym zbiorem wspomnień,
+      do których lubię wracać.
+    </p>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <span>
+    © 2026 w drodze.
+  </span>
+
+  <span>
+    zrobione z ciekawości
+  </span>
+
+</footer>
+
+
+<!-- v=3 wymusza pobranie aktualnego JS -->
+<script src="script.js?v=3"></script>
+
+</body>
+</html>
