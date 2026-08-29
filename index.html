@@ -16,7 +16,7 @@
   >
 
   <!-- v=3 wymusza pobranie aktualnego CSS -->
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 
 <body>
@@ -554,8 +554,51 @@
 </footer>
 
 
-<!-- v=3 wymusza pobranie aktualnego JS -->
-<script src="script.js?v=3"></script>
+<!-- =========================
+     OKNO Z OPISEM PODRÓŻY
+     ========================= -->
+
+<div
+  class="travel-modal"
+  id="travelModal"
+  aria-hidden="true"
+>
+
+  <div
+    class="travel-modal-content"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+
+    <button
+      class="modal-close"
+      type="button"
+      aria-label="Zamknij opis podróży"
+    >
+      ×
+    </button>
+
+
+    <p class="eyebrow">
+      notatka z podróży
+    </p>
+
+
+    <h2
+      class="modal-title"
+      id="modalTitle"
+    ></h2>
+
+
+    <div class="modal-text"></div>
+
+  </div>
+
+</div>
+
+
+<script src="script.js?v=4"></script>
 
 </body>
 </html>

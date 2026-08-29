@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   // ==========================================
-  // GALERIE
+  // GALERIE ZDJĘĆ
   // ==========================================
 
-  const galleries = document.querySelectorAll(".gallery");
+  const galleries =
+    document.querySelectorAll(".gallery");
+
 
   galleries.forEach(function (gallery) {
 
@@ -26,14 +28,18 @@ document.addEventListener("DOMContentLoaded", function () {
           thumbnail.dataset.alt || "Zdjęcie z podróży";
 
 
-        if (!image || !mainImage) {
+        if (!mainImage || !image) {
           return;
         }
 
 
+        // Zmieniamy duże zdjęcie
+
         mainImage.src = image;
         mainImage.alt = alt;
 
+
+        // Usuwamy aktywne zaznaczenie
 
         thumbnails.forEach(function (item) {
 
@@ -41,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         });
 
+
+        // Zaznaczamy klikniętą miniaturę
 
         thumbnail.classList.add("active");
 
@@ -53,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // ==========================================
-  // FILTRY
+  // FILTROWANIE PODRÓŻY
   // ==========================================
 
   const filterButtons =
@@ -67,9 +75,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     button.addEventListener("click", function () {
 
-      const filter =
+      const selectedFilter =
         button.dataset.filter;
 
+
+      // Aktywny przycisk filtra
 
       filterButtons.forEach(function (item) {
 
@@ -81,11 +91,17 @@ document.addEventListener("DOMContentLoaded", function () {
       button.classList.add("active");
 
 
+      // Pokazywanie odpowiednich kart
+
       tripCards.forEach(function (card) {
 
+        const category =
+          card.dataset.category;
+
+
         const shouldShow =
-          filter === "all" ||
-          card.dataset.category === filter;
+          selectedFilter === "all" ||
+          selectedFilter === category;
 
 
         card.classList.toggle(
@@ -102,70 +118,166 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // ==========================================
-  // CZYTAJ / ZWIŃ
+  // MODAL — ELEMENTY
   // ==========================================
+
+  const modal =
+    document.getElementById("travelModal");
+
+  const modalTitle =
+    modal.querySelector(".modal-title");
+
+  const modalText =
+    modal.querySelector(".modal-text");
+
+  const modalClose =
+    modal.querySelector(".modal-close");
 
   const readButtons =
     document.querySelectorAll(".read-more");
 
 
+
+  // ==========================================
+  // OTWIERANIE MODALA
+  // ==========================================
+
   readButtons.forEach(function (button) {
-
-    const card =
-      button.closest(".trip-card");
-
-
-    if (!card) {
-      return;
-    }
-
-
-    const description =
-      card.querySelector(".trip-description");
-
-
-    if (!description) {
-      return;
-    }
-
 
     button.addEventListener("click", function () {
 
-      const isClosed =
-        description.hasAttribute("hidden");
+      const card =
+        button.closest(".trip-card");
 
 
-      if (isClosed) {
-
-        description.removeAttribute("hidden");
-
-        button.setAttribute(
-          "aria-expanded",
-          "true"
-        );
-
-        button.innerHTML =
-          'Zwiń <span aria-hidden="true">↑</span>';
-
-      } else {
-
-        description.setAttribute(
-          "hidden",
-          ""
-        );
-
-        button.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-        button.innerHTML =
-          'Czytaj <span aria-hidden="true">↗</span>';
-
+      if (!card) {
+        return;
       }
+
+
+      const titleElement =
+        card.querySelector("h3");
+
+      const descriptionElement =
+        card.querySelector(".trip-description");
+
+
+      if (!titleElement || !descriptionElement) {
+        return;
+      }
+
+
+      // Pobieramy tytuł
+
+      const title =
+        titleElement.textContent.trim();
+
+
+      // Kopiujemy HTML pełnego opisu.
+      // Dzięki temu zachowujemy akapity <p>.
+
+      const description =
+        descriptionElement.innerHTML;
+
+
+      // Wstawiamy dane do okna
+
+      modalTitle.textContent = title;
+
+      modalText.innerHTML = description;
+
+
+      // Pokazujemy modal
+
+      modal.classList.add("open");
+
+      modal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      // Blokujemy przewijanie strony w tle
+
+      document.body.classList.add(
+        "modal-open"
+      );
 
     });
 
   });
+
+
+
+  // ==========================================
+  // FUNKCJA ZAMYKANIA
+  // ==========================================
+
+  function closeModal() {
+
+    modal.classList.remove("open");
+
+    modal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.classList.remove(
+      "modal-open"
+    );
+
+  }
+
+
+
+  // ==========================================
+  // KRZYŻYK
+  // ==========================================
+
+  modalClose.addEventListener(
+    "click",
+    closeModal
+  );
+
+
+
+  // ==========================================
+  // KLIKNIĘCIE W CIEMNE TŁO
+  // ==========================================
+
+  modal.addEventListener(
+    "click",
+    function (event) {
+
+      if (event.target === modal) {
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+
+  // ==========================================
+  // ESC
+  // ==========================================
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Escape" &&
+        modal.classList.contains("open")
+      ) {
+
+        closeModal();
+
+      }
+
+    }
+  );
 
 });

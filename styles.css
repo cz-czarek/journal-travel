@@ -548,3 +548,160 @@ footer {
   }
 
 }
+
+/* =========================================
+   MODAL — PEŁNY OPIS PODRÓŻY
+   ========================================= */
+
+.travel-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background: rgba(20, 28, 25, 0.68);
+}
+
+
+/* Klasa dodawana przez JavaScript */
+
+.travel-modal.open {
+  display: flex;
+}
+
+
+/* Właściwe okno */
+
+.travel-modal-content {
+  position: relative;
+
+  width: min(620px, 100%);
+  max-height: 85vh;
+
+  overflow-y: auto;
+
+  padding: 55px 50px 45px;
+
+  background: var(--paper);
+  color: var(--ink);
+
+  box-shadow:
+    0 25px 80px
+    rgba(20, 28, 25, 0.35);
+}
+
+
+/* Tytuł */
+
+.modal-title {
+  margin: 0 45px 25px 0;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+
+/* Pełny tekst */
+
+.modal-text {
+  color: var(--muted);
+
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
+
+.modal-text p {
+  margin: 0 0 18px;
+}
+
+
+.modal-text p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* Krzyżyk */
+
+.modal-close {
+  position: absolute;
+
+  top: 16px;
+  right: 18px;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+  color: var(--ink);
+
+  cursor: pointer;
+
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+
+.modal-close:hover {
+  color: var(--coral);
+}
+
+
+/* Gdy modal jest otwarty,
+   nie przewijamy strony w tle */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+/* =========================================
+   MODAL — TELEFON
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  .travel-modal {
+    padding: 14px;
+  }
+
+
+  .travel-modal-content {
+    width: 100%;
+
+    max-height: 90vh;
+
+    padding: 50px 24px 30px;
+  }
+
+
+  .modal-title {
+    margin-right: 35px;
+
+    font-size: 2rem;
+  }
+
+
+  .modal-close {
+    top: 10px;
+    right: 10px;
+  }
+
+}
