@@ -279,5 +279,112 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
   );
+  // ==========================================
+  // LIGHTBOX — POWIĘKSZENIE ZDJĘCIA
+  // ==========================================
+
+  const lightbox =
+    document.getElementById("imageLightbox");
+
+  const lightboxImage =
+    lightbox.querySelector(".lightbox-image");
+
+  const lightboxClose =
+    lightbox.querySelector(".lightbox-close");
+
+  const largeImages =
+    document.querySelectorAll(".gallery-main");
+
+
+  // Otwieranie zdjęcia
+
+  largeImages.forEach(function (image) {
+
+    image.addEventListener("click", function () {
+
+      lightboxImage.src = image.src;
+      lightboxImage.alt = image.alt;
+
+      lightbox.classList.add("open");
+
+      lightbox.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+      document.body.classList.add(
+        "modal-open"
+      );
+
+    });
+
+  });
+
+
+
+  // Funkcja zamykająca lightbox
+
+  function closeLightbox() {
+
+    lightbox.classList.remove("open");
+
+    lightbox.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    document.body.classList.remove(
+      "modal-open"
+    );
+
+    lightboxImage.src = "";
+
+  }
+
+
+
+  // Krzyżyk
+
+  lightboxClose.addEventListener(
+    "click",
+    closeLightbox
+  );
+
+
+
+  // Kliknięcie w ciemne tło
+
+  lightbox.addEventListener(
+    "click",
+    function (event) {
+
+      if (event.target === lightbox) {
+
+        closeLightbox();
+
+      }
+
+    }
+  );
+
+
+
+  // ESC
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Escape" &&
+        lightbox.classList.contains("open")
+      ) {
+
+        closeLightbox();
+
+      }
+
+    }
+  );
 
 });
