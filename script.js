@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // ==========================================
-  // FUNKCJA ZAMYKANIA
+  // FUNKCJA ZAMYKANIA MODALA
   // ==========================================
 
   function closeModal() {
@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // ==========================================
-  // KRZYŻYK
+  // KRZYŻYK MODALA
   // ==========================================
 
   modalClose.addEventListener(
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // ==========================================
-  // KLIKNIĘCIE W CIEMNE TŁO
+  // KLIKNIĘCIE W TŁO MODALA
   // ==========================================
 
   modal.addEventListener(
@@ -261,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   // ==========================================
-  // ESC
+  // ESC — MODAL
   // ==========================================
 
   document.addEventListener(
@@ -279,8 +279,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
   );
+
+
+
   // ==========================================
-  // LIGHTBOX — POWIĘKSZENIE ZDJĘCIA
+  // LIGHTBOX — PEŁNOEKRANOWA GALERIA
   // ==========================================
 
   const lightbox =
@@ -292,18 +295,113 @@ document.addEventListener("DOMContentLoaded", function () {
   const lightboxClose =
     lightbox.querySelector(".lightbox-close");
 
+  const lightboxPrev =
+    lightbox.querySelector(".lightbox-prev");
+
+  const lightboxNext =
+    lightbox.querySelector(".lightbox-next");
+
+  const lightboxCounter =
+    lightbox.querySelector(".lightbox-counter");
+
   const largeImages =
     document.querySelectorAll(".gallery-main");
 
 
-  // Otwieranie zdjęcia
+  let currentGalleryImages = [];
+
+  let currentImageIndex = 0;
+
+  let currentGallery = null;
+
+
+
+  // ==========================================
+  // WYŚWIETLANIE AKTUALNEGO ZDJĘCIA
+  // ==========================================
+
+  function showLightboxImage() {
+
+    if (currentGalleryImages.length === 0) {
+      return;
+    }
+
+
+    const currentImage =
+      currentGalleryImages[currentImageIndex];
+
+
+    lightboxImage.src =
+      currentImage.src;
+
+    lightboxImage.alt =
+      currentImage.alt;
+
+
+    lightboxCounter.textContent =
+      (currentImageIndex + 1) +
+      " / " +
+      currentGalleryImages.length;
+
+  }
+
+
+
+  // ==========================================
+  // OTWIERANIE LIGHTBOXA
+  // ==========================================
 
   largeImages.forEach(function (image) {
 
     image.addEventListener("click", function () {
 
-      lightboxImage.src = image.src;
-      lightboxImage.alt = image.alt;
+      currentGallery =
+        image.closest(".gallery");
+
+
+      if (!currentGallery) {
+        return;
+      }
+
+
+      const thumbnails =
+        Array.from(
+          currentGallery.querySelectorAll(".thumbnail")
+        );
+
+
+      currentGalleryImages =
+        thumbnails.map(function (thumbnail) {
+
+          return {
+
+            src: thumbnail.dataset.image,
+
+            alt:
+              thumbnail.dataset.alt ||
+              "Zdjęcie z podróży"
+
+          };
+
+        });
+
+
+      const activeIndex =
+        thumbnails.findIndex(function (thumbnail) {
+
+          return thumbnail.classList.contains("active");
+
+        });
+
+
+      currentImageIndex =
+        activeIndex >= 0
+          ? activeIndex
+          : 0;
+
+
+      showLightboxImage();
+
 
       lightbox.classList.add("open");
 
@@ -311,6 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "aria-hidden",
         "false"
       );
+
 
       document.body.classList.add(
         "modal-open"
@@ -322,9 +421,149 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  // Funkcja zamykająca lightbox
+  // ==========================================
+  // NASTĘPNE ZDJĘCIE
+  // ==========================================
+
+  function nextLightboxImage() {
+
+    if (currentGalleryImages.length === 0) {
+      return;
+    }
+
+
+    currentImageIndex++;
+
+
+    if (
+      currentImageIndex >=
+      currentGalleryImages.length
+    ) {
+
+      currentImageIndex = 0;
+
+    }
+
+
+    showLightboxImage();
+
+  }
+
+
+
+  // ==========================================
+  // POPRZEDNIE ZDJĘCIE
+  // ==========================================
+
+  function previousLightboxImage() {
+
+    if (currentGalleryImages.length === 0) {
+      return;
+    }
+
+
+    currentImageIndex--;
+
+
+    if (currentImageIndex < 0) {
+
+      currentImageIndex =
+        currentGalleryImages.length - 1;
+
+    }
+
+
+    showLightboxImage();
+
+  }
+
+
+
+  // ==========================================
+  // STRZAŁKI NA EKRANIE
+  // ==========================================
+
+  lightboxNext.addEventListener(
+    "click",
+    nextLightboxImage
+  );
+
+
+  lightboxPrev.addEventListener(
+    "click",
+    previousLightboxImage
+  );
+
+
+
+  // ==========================================
+  // ZAMYKANIE LIGHTBOXA
+  // ==========================================
 
   function closeLightbox() {
+
+    // Po zamknięciu ustawiamy ostatnio oglądane
+    // zdjęcie jako główne zdjęcie galerii.
+
+    if (
+      currentGallery &&
+      currentGalleryImages.length > 0
+    ) {
+
+      const mainImage =
+        currentGallery.querySelector(
+          ".gallery-main"
+        );
+
+      const thumbnails =
+        Array.from(
+          currentGallery.querySelectorAll(
+            ".thumbnail"
+          )
+        );
+
+
+      const selectedImage =
+        currentGalleryImages[currentImageIndex];
+
+
+      mainImage.src =
+        selectedImage.src;
+
+      mainImage.alt =
+        selectedImage.alt;
+
+
+      // Zmieniamy aktywną miniaturę
+
+      thumbnails.forEach(
+        function (thumbnail, index) {
+
+          thumbnail.classList.toggle(
+            "active",
+            index === currentImageIndex
+          );
+
+        }
+      );
+
+
+      // Przesuwamy pasek miniaturek tak,
+      // żeby aktywna miniatura była widoczna.
+
+      if (thumbnails[currentImageIndex]) {
+
+        thumbnails[currentImageIndex]
+          .scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center"
+          });
+
+      }
+
+    }
+
 
     lightbox.classList.remove("open");
 
@@ -333,9 +572,11 @@ document.addEventListener("DOMContentLoaded", function () {
       "true"
     );
 
+
     document.body.classList.remove(
       "modal-open"
     );
+
 
     lightboxImage.src = "";
 
@@ -343,7 +584,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  // Krzyżyk
+  // ==========================================
+  // KRZYŻYK LIGHTBOXA
+  // ==========================================
 
   lightboxClose.addEventListener(
     "click",
@@ -352,7 +595,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  // Kliknięcie w ciemne tło
+  // ==========================================
+  // KLIKNIĘCIE W TŁO LIGHTBOXA
+  // ==========================================
 
   lightbox.addEventListener(
     "click",
@@ -369,18 +614,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  // ESC
+  // ==========================================
+  // KLAWIATURA — LIGHTBOX
+  // ==========================================
 
   document.addEventListener(
     "keydown",
     function (event) {
 
       if (
-        event.key === "Escape" &&
-        lightbox.classList.contains("open")
+        !lightbox.classList.contains("open")
       ) {
 
+        return;
+
+      }
+
+
+      if (event.key === "Escape") {
+
         closeLightbox();
+
+      }
+
+
+      if (event.key === "ArrowRight") {
+
+        nextLightboxImage();
+
+      }
+
+
+      if (event.key === "ArrowLeft") {
+
+        previousLightboxImage();
 
       }
 
