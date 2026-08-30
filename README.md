@@ -1,5 +1,10 @@
 # W drodze — Travel Journal
 
+## Live Demo
+
+[Zobacz działającą stronę]
+(https://cz-czarek.github.io/journal-travel/#start)
+
 Osobisty dziennik podróży stworzony jako mój pierwszy projekt webowy.
 
 Projekt łączy własne zdjęcia i wspomnienia z podróży z praktyczną nauką HTML, CSS, JavaScriptu, GitHuba oraz pracy z narzędziami AI.
